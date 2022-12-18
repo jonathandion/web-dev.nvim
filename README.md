@@ -10,7 +10,7 @@
 
 The _minimum_ recommended requirements are:
 
--   neovim `>= 0.7.0`
+- neovim `>= 0.7.0`
 
 ## Installation
 
@@ -25,10 +25,10 @@ The _minimum_ recommended requirements are:
 
 ## Configuration
 
-You could directly modify the `init.lua` file with your personal customizations. This option is the most straightforward, but if you update your config from this repo, you may need to reapply your changes.
+You could directly modify the `init.lua` file with your personal customizations. However, if you update your config from this repo, you may need to reapply your changes.
 
-An alternative approach is to create a separate `custom.plugins` module to register your own plugins. In addition, you can handle further customizations in the `/after/plugin/` directory (see `:help load-plugins`). Leveraging this technique should make upgrading to a newer version of this repo easier. 
+Alternatively, you can create a separate `custom.plugins` module to register your own plugins, and handle further customizations in the `/after/plugin/` directory (see :help load-plugins). This technique makes upgrading to a newer version of this repo easier.
 
 ## Disclamer
 
-This repo is mostly for personal use only. The `after/plugin` directory contains personal configs that fit my workflow. You can also install them by running `./install all`.
+This repo is primarily for personal use. The `after/plugin` directory contains personal configs that fit my workflow. You can also install them by running `./install all`.
