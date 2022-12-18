@@ -10,11 +10,11 @@ end
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- Coding related plugins
+  -- Coding plugins
   use 'github/copilot.vim'
   use 'janko-m/vim-test'
 
-  -- Git related plugins
+  -- Git plugins
   use 'tpope/vim-fugitive'
   use 'ruanyl/vim-gh-line'
   use 'junegunn/gv.vim'
@@ -38,7 +38,7 @@ require('packer').startup(function(use)
   use 'andrewradev/splitjoin.vim'
   use 'raimondi/delimitmate'
 
-  -- GUI related plugins
+  -- GUI plugins
   use 'ellisonleao/gruvbox.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'mhinz/vim-startify'
@@ -53,10 +53,10 @@ require('packer').startup(function(use)
   use 'tpope/vim-vinegar' use 'unblevable/quick-scope'
   use 'voldikss/vim-floaterm'
 
-   -- Syntax related plugins
+  -- Syntax plugins
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
-   -- Completion related plugins
+  -- Completion plugins
   use "williamboman/mason.nvim"
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -166,7 +166,7 @@ require('gitsigns').setup {
   },
 }
 
--- lualine (statusline)
+-- Lualine (statusline)
 require('lualine').setup {
   options = {
     icons_enabled = false,
@@ -226,7 +226,6 @@ lsp.nvim_workspace()
 lsp.setup()
 
 -- Options
-
 -- theme
 vim.cmd([[colorscheme gruvbox]])
 
@@ -236,7 +235,6 @@ vim.g.maplocalleader = ' '
 
 vim.wo.number = true
 
--- options
 vim.o.background = "dark"
 vim.o.backup = false
 vim.o.breakindent = true
