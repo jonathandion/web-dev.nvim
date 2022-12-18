@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+backup() {
+  rm -rf "$(pwd)"/backup
+  cp -RL "${1}" "$(pwd)"/backup
+  echo "Backup created at $(pwd)/backup"
+}
+
+main() {
+  src_dir=$(pwd)/src
+  dest_dir=$HOME/.config/nvim
+  install_all=$1
+
+  if [ ! -d "${dest_dir}" ]; then
+     mkdir -p "$dest_dir"
+   fi
+
+  backup "$dest_dir"
+
+  echo "Installing..."
+  if [ "$install_all" == "all" ]; then
+    for file in "$src_dir"/*; do
+      ln -snf "$file" "$dest_dir/$(basename "$file")"
+    done
+  else
+    ln -snf "$src_dir/init.lua" "$dest_dir/init.lua"
+  fi
+
+  echo "Done!"
+}
+
+main "$@"
