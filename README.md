@@ -2,9 +2,9 @@
 
 > Small Neovim configuration written in Lua that is specifically designed for web development.
 
-* Small (~300 lines)
-* Single-file
-* Highly configurable
+* Small: ~300 lines of code.
+* Simple: one single file, easy to read and understand.
+* Flexible: customize it to your specific needs and preferences.
 
 ## Requirements
 
