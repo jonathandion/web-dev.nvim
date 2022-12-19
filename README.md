@@ -21,7 +21,7 @@ The _minimum_ recommended requirements are:
 ### Manually
 
 * Backup your previous configuration
-* Copy and paste the web-dev.nvim `init.lua` into `$HOME/.config/nvim/init.lua`
+* Copy and paste the [init.lua](./src/init.lua) into `$HOME/.config/nvim/init.lua`
 
 ## Configuration
 
