@@ -11,53 +11,53 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Coding plugins
-  use 'github/copilot.vim'
-  use 'janko-m/vim-test'
+  use 'janko-m/vim-test'                                      --  Run tests quickly
 
   -- Git plugins
-  use 'tpope/vim-fugitive'
-  use 'ruanyl/vim-gh-line'
-  use 'junegunn/gv.vim'
+  use 'tpope/vim-fugitive'                                    --  Git wrapper
+  use 'ruanyl/vim-gh-line'                                    --  Open GitHub file at line
+  use 'junegunn/gv.vim'                                       --  Git commit browser
 
   -- Utility plugins
-  use 'jremmen/vim-ripgrep'
-  use 'ThePrimeagen/harpoon'
-  use 'junegunn/vim-peekaboo'
-  use 'machakann/vim-highlightedyank'
-  use 'easymotion/vim-easymotion'
+  use 'jremmen/vim-ripgrep'                                   --  Grep on steroids
+  use 'ThePrimeagen/harpoon'                                  --  Bookmark management
+  use 'junegunn/vim-peekaboo'                                 --  Preview registers
+  use 'machakann/vim-highlightedyank'                         --  Highlight yanked text
+  use 'easymotion/vim-easymotion'                             --  Move fast
 
   -- Text manipulation plugins
-  use 'mg979/vim-visual-multi'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-sleuth'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-unimpaired'
-  use 'wellle/targets.vim'
-  use 'junegunn/vim-easy-align'
-  use 'andrewradev/splitjoin.vim'
-  use 'raimondi/delimitmate'
+  use 'tpope/vim-surround'                                    --  Surround text objects
+  use 'wellle/targets.vim'                                    --  Additional text objects
+  use 'mg979/vim-visual-multi'                                --  Multiple cursors
+  use 'tpope/vim-commentary'                                  --  Comment out code
+  use 'tpope/vim-repeat'                                      --  Repeat commands
+  use 'tpope/vim-sleuth'                                      --  Detect indentation
+  use 'tpope/vim-unimpaired'                                  --  Pairs of handy bracket mappings
+  use 'junegunn/vim-easy-align'                               --  Align text
+  use 'andrewradev/splitjoin.vim'                             --  Split/join lines
+  use 'raimondi/delimitmate'                                  --  Auto closing quotes, brackets, etc
 
-  -- GUI plugins
-  use 'ellisonleao/gruvbox.nvim'
-  use 'nvim-lualine/lualine.nvim'
-  use 'mhinz/vim-startify'
-  use 'lewis6991/gitsigns.nvim'
-  use "nvim-telescope/telescope-file-browser.nvim"
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  -- UI plugins
+  use 'ellisonleao/gruvbox.nvim'                              --  Color scheme
+  use 'mhinz/vim-startify'                                    --  Custom start screen
+  use 'nvim-lualine/lualine.nvim'                             --  Fancy statusline
+  use 'lewis6991/gitsigns.nvim'                               --  Git signs
 
   -- File explorer plugins
-  use 'tpope/vim-vinegar' use 'unblevable/quick-scope'
-  use 'voldikss/vim-floaterm'
+  use 'tpope/vim-vinegar' use 'unblevable/quick-scope'        --  Netrw extension
+  use 'voldikss/vim-floaterm'                                 --  Floating terminal
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',           --  Fuzzy finder
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use "nvim-telescope/telescope-file-browser.nvim"            --  Fuzzy file browser
 
   -- Syntax plugins
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}  --  Syntax highlighting
 
-  -- Completion plugins
-  use "williamboman/mason.nvim"
+  -- LSP plugins
+  use 'github/copilot.vim'                                    --  AI code completion
+  use "williamboman/mason.nvim"                               --  Easily install and manage LSP servers, DAP servers, linters, and formatters.
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
@@ -78,6 +78,7 @@ require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'},
 
+		  -- UI
 		  {'j-hui/fidget.nvim'},
 	  }
   }
@@ -104,13 +105,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.expand '$MYVIMRC',
 })
 
--- Netrw config
+-- Netrw config (file explorer)
 vim.g.netrw_banner = 1
 vim.g.netrw_liststyle =  4
 vim.g.netrw_localrmdir = 'rm -r'
 vim.g.netrw_hide = 0
 
--- Startify config
+-- Startify config (start screen)
 vim.g.startify_change_to_dir = 0
 vim.g.startify_lists = {
   { header = {("   Recent Files in: " .. vim.fn.getcwd())}, type = "dir"},
@@ -137,10 +138,8 @@ require("telescope").load_extension('harpoon')
 -- Treesitter (syntax highlight)
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
-    "bash",
-    "hcl",
     "lua",
-    "solidity",
+    "bash",
     "json",
     "javascript",
     "typescript",
@@ -155,7 +154,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
--- Gitsigns
+-- Gitsigns (git icons)
 require('gitsigns').setup {
   signs = {
     add = { text = '+' },
@@ -225,11 +224,11 @@ end)
 lsp.nvim_workspace()
 lsp.setup()
 
--- Options
 -- theme
 vim.cmd([[colorscheme gruvbox]])
 
--- global options
+-- Options
+-- space as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -240,7 +239,7 @@ vim.o.backup = false
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.cursorline = true
-vim.o.expandtab = true
+vim.o.expandtab = true --
 vim.o.guicursor = "" -- fat cursor
 vim.o.history = 500
 vim.o.hlsearch = true
@@ -322,14 +321,14 @@ keyset('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F
 keyset("n", "<leader>m", require("harpoon.mark").add_file)
 keyset("n", "<leader>fm", ":Telescope harpoon marks<cr>")
 
--- lsp
+-- lsp - set lsp mappings in callback
 function SetCustomLspMappings ()
-  keyset('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
-  keyset('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction'})
   keyset('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition'} )
   keyset('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences'})
   keyset('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation'})
   keyset('n', '<leader>D', vim.lsp.buf.type_definition, { desc =  'Type [D]efinition' })
   keyset('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc =  '[D]ocument [S]ymbols' })
   keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc =  '[W]orkspace [S]ymbols' })
+  keyset('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
+  keyset('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction'})
 end
