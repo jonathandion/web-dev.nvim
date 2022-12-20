@@ -217,8 +217,8 @@ lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
 })
 
-lsp.on_attach(function()
-  SetCustomLspMappings()
+lsp.on_attach(function(client, bufnr)
+  SetCustomLspMappings(bufnr)
 end)
 
 lsp.nvim_workspace()
@@ -266,6 +266,13 @@ vim.o.wildmenu = true
 vim.o.wildmode = 'full'
 vim.o.wrap = true
 vim.o.writebackup = false
+
+-- Auto commands
+-- run eslint on save
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern =  "*.{js,ts,jsx,tsx}",
+  command = ":EslintFixAll",
+})
 
 -- Keymaps
 local keyset = vim.keymap.set
@@ -322,7 +329,7 @@ keyset("n", "<leader>m", require("harpoon.mark").add_file)
 keyset("n", "<leader>fm", ":Telescope harpoon marks<cr>")
 
 -- lsp - set lsp mappings in callback
-function SetCustomLspMappings ()
+function SetCustomLspMappings (bufnr)
   keyset('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition'} )
   keyset('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences'})
   keyset('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation'})
@@ -331,4 +338,14 @@ function SetCustomLspMappings ()
   keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc =  '[W]orkspace [S]ymbols' })
   keyset('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
   keyset('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction'})
+  keyset('n', "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" })
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    if vim.lsp.buf.format then
+      vim.lsp.buf.format()
+    elseif vim.lsp.buf.formatting then
+      vim.lsp.buf.formatting()
+    end
+  end, { desc = 'Format current buffer with LSP' })
 end
