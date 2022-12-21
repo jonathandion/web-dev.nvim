@@ -9,7 +9,7 @@ user_cmd('PrettyJson', ":%!jq '.'", {})
 user_cmd(
   'Ranger',
   "FloatermNew ranger",
-  {bang = true}
+  { bang = true }
 )
 user_cmd("Cppath", function()
   local path = vim.fn.expand("%:p")
@@ -30,7 +30,8 @@ function _G.abbreviate_or_noop(input, output)
 end
 
 function _G.cmd_alias(alias, cmd)
-  vim.api.nvim_command("cabbrev <expr> " .. alias .. " " .. "v:lua.abbreviate_or_noop('" .. alias .. "', '" .. cmd .. "')")
+  vim.api.nvim_command("cabbrev <expr> " ..
+    alias .. " " .. "v:lua.abbreviate_or_noop('" .. alias .. "', '" .. cmd .. "')")
 end
 
 cmd_alias("node", "! node %")
