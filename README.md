@@ -6,6 +6,13 @@
 * Simple: one single file, easy to read and understand.
 * Flexible: customize it to your specific needs and preferences.
 
+## Screenshots
+
+|                                                                                                                                                        |                                                                                                                                                  |                                                                                                                                        |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
+|           <img width="500" src="https://user-images.githubusercontent.com/4976218/208801242-6ef86ccd-9a0e-4ed8-bc8a-a559ee230051.png">           |                 <img width="500" src="https://user-images.githubusercontent.com/4976218/208801332-95a610d9-de19-446e-8a0f-dc6651d003ea.png">                 | <img width="500" src="https://user-images.githubusercontent.com/4976218/208801498-8d65e1de-f3a8-4bc3-8f36-fc152fa15251.png"> |
+
+
 ## Requirements
 
 The _minimum_ recommended requirements are:
