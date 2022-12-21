@@ -7,6 +7,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- @plugins
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
@@ -97,14 +98,6 @@ if is_bootstrap then
   return
 end
 
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
-})
-
 -- Netrw config (file explorer)
 vim.g.netrw_banner = 1
 vim.g.netrw_liststyle =  4
@@ -184,7 +177,6 @@ require('fidget').setup()
 
 -- Mason
 require("mason").setup()
-
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
@@ -193,10 +185,23 @@ lsp.set_preferences({
   set_lsp_keymaps = false
 })
 
+-- lsp servers based on: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 lsp.ensure_installed({
+  -- web
+  'html',
   'tsserver',
+  'cssls',
+  'stylelint_lsp',
   'eslint',
+
+  -- web3/blockchain
+  'solang',
+
+  -- scripting
+  'bashls',
   'sumneko_lua',
+
+  'marksman',
 })
 
 local cmp = require('cmp')
@@ -217,7 +222,7 @@ lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
   SetCustomLspMappings(bufnr)
 end)
 
@@ -227,7 +232,7 @@ lsp.setup()
 -- theme
 vim.cmd([[colorscheme gruvbox]])
 
--- Options
+-- @options
 -- space as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -267,14 +272,22 @@ vim.o.wildmode = 'full'
 vim.o.wrap = true
 vim.o.writebackup = false
 
--- Auto commands
+-- @commands
 -- run eslint on save
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern =  "*.{js,ts,jsx,tsx}",
   command = ":EslintFixAll",
 })
 
--- Keymaps
+-- automatically source and re-compile packer whenever you save this init.lua
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | PackerCompile',
+  group = packer_group,
+  pattern = vim.fn.expand '$MYVIMRC',
+})
+
+-- @keymaps
 local keyset = vim.keymap.set
 
 keyset("n", "<Esc><Esc>", ":noh<cr>")
@@ -286,6 +299,7 @@ keyset("n", "<leader>n", ":Note<cr>")
 keyset("n", "<leader>y", ":Cppath<cr>")
 keyset("n", "<C-space>", "/")
 keyset("n", "<leader>-", ":Explore<cr>")
+keyset('n', '<leader>e', ':e ~/.config/nvim/init.lua<cr>')
 keyset('n', '<leader>d', vim.diagnostic.open_float)
 keyset('n', '[d', vim.diagnostic.goto_prev)
 keyset('n', ']d', vim.diagnostic.goto_next)
@@ -321,8 +335,9 @@ keyset('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]i
 keyset('n', '<leader>fs', require('telescope.builtin').git_status, { desc = '[F]ind [G]it status' })
 keyset('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
 keyset('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
-keyset('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
+keyset('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind [W]ord' })
 keyset('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+keyset('n', '<leader>fc', require('telescope.builtin').commands, { desc =  '[F]ind [C]ommands' })
 
 -- harpoon
 keyset("n", "<leader>m", require("harpoon.mark").add_file)
@@ -331,14 +346,15 @@ keyset("n", "<leader>fm", ":Telescope harpoon marks<cr>")
 -- lsp - set lsp mappings in callback
 function SetCustomLspMappings (bufnr)
   keyset('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition'} )
-  keyset('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences'})
   keyset('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation'})
   keyset('n', '<leader>D', vim.lsp.buf.type_definition, { desc =  'Type [D]efinition' })
-  keyset('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc =  '[D]ocument [S]ymbols' })
-  keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc =  '[W]orkspace [S]ymbols' })
   keyset('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
   keyset('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction'})
   keyset('n', "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" })
+
+  keyset('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences'})
+  keyset('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc =  '[D]ocument [S]ymbols' })
+  keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc =  '[W]orkspace [S]ymbols' })
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
