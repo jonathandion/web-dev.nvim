@@ -49,7 +49,7 @@ vim.opt.relativenumber = true
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 ```
 
-You can find my extra configuration file [here](./src/after/plugin/custom-commands.lua) as an example.
+You can find my extra configuration file [here](./src/after/plugin/custom.lua) as an example.
 
 ## ⚠️ Disclamer
 

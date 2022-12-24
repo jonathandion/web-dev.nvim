@@ -59,6 +59,7 @@ require('packer').startup(function(use)
 
 	-- LSP plugins
 	use 'github/copilot.vim' --  AI code completion
+	use 'dnlhc/glance.nvim' -- Preview definitions, type definitions, references, implementations like vscode peek.
 	use "williamboman/mason.nvim" --  Easily install and manage LSP servers, DAP servers, linters, and formatters.
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -110,6 +111,9 @@ vim.g.startify_change_to_dir = 0
 vim.g.startify_lists = {
 	{ header = { ("   Recent Files in: " .. vim.fn.getcwd()) }, type = "dir" },
 }
+
+-- Glance
+require('glance').setup()
 
 -- Telescope (fuzzy finder)
 require("telescope").setup {
@@ -288,6 +292,19 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 	pattern = vim.fn.expand '$MYVIMRC',
 })
 
+-- custom file types
+vim.filetype.add({
+	extension = {
+		eslintrc = 'json',
+		prettierrc = 'json',
+		mdx = 'markdown',
+		mjml = 'html',
+	},
+	pattern = {
+		['.*%.env.*'] = 'sh',
+	},
+})
+
 -- @keymaps
 local keyset = vim.keymap.set
 
@@ -346,14 +363,14 @@ keyset("n", "<leader>fm", ":Telescope harpoon marks<cr>")
 
 -- lsp - set lsp mappings in callback
 function SetCustomLspMappings(bufnr)
-	keyset('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition' })
+	keyset('n', 'gd', ':Glance definitions<cr>', { desc = '[G]oto [D]efinition' })
 	keyset('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation' })
-	keyset('n', '<leader>D', vim.lsp.buf.type_definition, { desc = 'Type [D]efinition' })
+	keyset('n', '<leader>D', ':Glance type_definitions<cr>', { desc = 'Type [D]efinition' })
 	keyset('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
 	keyset('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
 	keyset('n', "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" })
 
-	keyset('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences' })
+	keyset('n', 'gr', ':Glance references<cr>', { desc = '[G]oto [R]eferences' })
 	keyset('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
 	keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
 		{ desc = '[W]orkspace [S]ymbols' })
