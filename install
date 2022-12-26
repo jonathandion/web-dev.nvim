@@ -15,7 +15,9 @@ main() {
      mkdir -p "$dest_dir"
    fi
 
-  backup "$dest_dir"
+  if [ -d "${HOME}/.config/nvim" ]; then
+    backup "$HOME/.config/nvim"
+  fi
 
   echo "Installing..."
   if [ "$install_all" == "all" ]; then
