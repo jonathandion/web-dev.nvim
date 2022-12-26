@@ -3,4 +3,4 @@ backup
 # Devenv
 .devenv*
 devenv.local.nix
-# .pre-commit-config.yaml
+.pre-commit-config.yaml

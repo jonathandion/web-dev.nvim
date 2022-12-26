@@ -20,7 +20,7 @@ require("packer").startup(function(use)
   use("junegunn/gv.vim") --  Git commit browser
 
   -- Utility plugins
-  use('jremmen/vim-ripgrep') --  Grep on steroids
+  use("jremmen/vim-ripgrep") --  Grep on steroids
   use("ThePrimeagen/harpoon") --  Bookmark management
   use("junegunn/vim-peekaboo") --  Preview registers
   use("machakann/vim-highlightedyank") --  Highlight yanked text
