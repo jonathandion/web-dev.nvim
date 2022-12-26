@@ -16,3 +16,4 @@ user_cmd(
 -- @keymaps
 local keyset = vim.keymap.set
 keyset("n", "-", ":Ranger<cr>")
+keyset("n", "<leader>n", ":Note<cr>")
