@@ -386,12 +386,12 @@ keyset("n", ";", "<Plug>(easymotion-overwin-f)")
 -- telescope
 keyset('n', '<C-f>', telescope.find_files, { desc = '[F]ind [F]iles' })
 keyset('n', '<C-p>', telescope.commands, { desc = '[F]ind [C]ommands' })
-keyset('n', '<leader>ff', require('telescope.builtin').git_status, { desc = '[F]ind [F]iles Git Status' })
-keyset('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind [G]rep' })
-keyset('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
-keyset('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
-keyset('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind [W]ord' })
-keyset('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+keyset('n', '<leader>ff', telescope.git_status, { desc = '[F]ind [F]iles Git Status' })
+keyset('n', '<leader>fg', telescope.live_grep, { desc = '[F]ind [G]rep' })
+keyset('n', '<leader>fh', telescope.oldfiles, { desc = '[F]ind [H]istory' })
+keyset('n', '<leader>fb', telescope.buffers, { desc = '[F]ind [B]uffers' })
+keyset('n', '<leader>fw', telescope.grep_string, { desc = '[F]ind [W]ord' })
+keyset('n', '<leader>fd', telescope.diagnostics, { desc = '[F]ind [D]iagnostics' })
 
 -- harpoon
 keyset("n", "<leader>m", require("harpoon.mark").add_file)
@@ -407,8 +407,8 @@ function SetCustomLspMappings(bufnr)
   keyset('n', "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" })
 
   keyset('n', 'gr', ':Glance references<cr>', { desc = '[G]oto [R]eferences' })
-  keyset('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
-  keyset('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+  keyset('n', '<leader>ds', telescope.lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
+  keyset('n', '<leader>ws', telescope.lsp_dynamic_workspace_symbols,
     { desc = '[W]orkspace [S]ymbols' })
 
   -- Create a command `:Format` local to the LSP buffer
