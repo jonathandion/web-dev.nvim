@@ -245,7 +245,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.wo.number = true
-
+vim.o.path = table.concat({ '**' })
 vim.o.background = "dark"
 vim.o.backup = false
 vim.o.breakindent = true
