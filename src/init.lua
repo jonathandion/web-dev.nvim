@@ -34,7 +34,6 @@ require("packer").startup(function(use)
   use("tpope/vim-repeat") --  Repeat commands
   use("tpope/vim-sleuth") --  Detect indentation
   use("tpope/vim-unimpaired") --  Pairs of handy bracket mappings
-  use("junegunn/vim-easy-align") --  Align text
   use("andrewradev/splitjoin.vim") --  Split/join lines
   use("raimondi/delimitmate") --  Auto closing quotes, brackets, etc
 
@@ -118,6 +117,11 @@ require("glance").setup()
 
 -- Telescope (fuzzy finder)
 require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      ".git",
+    },
+  },
   extensions = {
     file_browser = {
       theme = "ivy",
@@ -199,15 +203,14 @@ lsp.ensure_installed({
   "cssls",
   "stylelint_lsp",
   "eslint",
+  "marksman",
 
   -- web3/blockchain
   "solang",
 
-  -- scripting
+  -- devops/infrastructure
   "bashls",
   "sumneko_lua",
-
-  "marksman",
 })
 
 local cmp = require("cmp")
@@ -316,13 +319,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   command = ":EslintFixAll",
 })
 
--- automatically source and re-compile packer whenever you save this init.lua
-vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | PackerCompile",
-  group = vim.api.nvim_create_augroup("Packer", { clear = true }),
-  pattern = vim.fn.expand("$MYVIMRC"),
-})
-
 cmd_alias("node", "! node %")
 cmd_alias("tsnode", "! ts-node %")
 
@@ -344,15 +340,34 @@ user_cmd("OldFiles", telescope.oldfiles, {})
 
 -- @keymaps
 local keyset = vim.keymap.set
+
+-- remove highlight
 keyset("n", "<Esc><Esc>", ":noh<cr>")
+
+-- navigate fast between paragraphs
 keyset("n", "<down>", "}")
 keyset("n", "<up>", "{")
+
+-- quit
 keyset("n", "<leader>q", ":bd<cr>")
+
+-- save
 keyset("n", "<leader>w", ":w<cr>")
+
+-- copy current buffer absolute path into clipboard
 keyset("n", "<leader>y", ":CopyCurrentPath<cr>")
+
+-- fast search
 keyset("n", "<C-space>", "/")
+
+-- file explorer
 keyset("n", "<leader>-", ":Explore<cr>")
-keyset("n", "<leader>e", ":e $MYVIMRC<cr>")
+
+-- replace word under cursor
+keyset("n", "<C-w>", ":%s#<c-r><c-w>##g<left><left>")
+keyset("v", "<C-w>", ":s#<c-r><c-w>##g<left><left>")
+
+-- diagnostic
 keyset("n", "<leader>d", vim.diagnostic.open_float)
 keyset("n", "[d", vim.diagnostic.goto_prev)
 keyset("n", "]d", vim.diagnostic.goto_next)
