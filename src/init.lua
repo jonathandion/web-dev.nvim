@@ -364,8 +364,8 @@ keyset("n", "<C-space>", "/")
 keyset("n", "<leader>-", ":Explore<cr>")
 
 -- replace word under cursor
-keyset("n", "<C-w>", ":%s#<c-r><c-w>##g<left><left>")
-keyset("v", "<C-w>", ":s#<c-r><c-w>##g<left><left>")
+keyset("n", "<C-r>", ":%s#<c-r><c-w>##g<left><left>")
+keyset("v", "<C-r>", ":s#<c-r><c-w>##g<left><left>")
 
 -- diagnostic
 keyset("n", "<leader>d", vim.diagnostic.open_float)
