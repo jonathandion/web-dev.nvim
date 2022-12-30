@@ -400,12 +400,12 @@ keyset("n", ";", "<Plug>(easymotion-overwin-f)")
 -- telescope
 keyset("n", "<C-f>", telescope.find_files, { desc = "[F]ind [F]iles" })
 keyset("n", "<C-p>", telescope.commands, { desc = "[F]ind [C]ommands" })
+keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
+keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 keyset("n", "<leader>ff", telescope.git_status, { desc = "[F]ind [F]iles Git Status" })
 keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
 keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
-keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
 keyset("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind [W]ord" })
-keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 
 -- harpoon
 keyset("n", "<leader>m", require("harpoon.mark").add_file)
