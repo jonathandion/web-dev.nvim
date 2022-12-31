@@ -146,7 +146,6 @@ require("nvim-treesitter.configs").setup({
     "json",
     "javascript",
     "typescript",
-    "astro",
   },
   sync_install = false,
   auto_install = true,
