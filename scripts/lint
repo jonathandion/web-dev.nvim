@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+main() {
+  echo "Linting..."
+  stylua ./src --config-path ./.stylua.toml
+  shellcheck ./scripts/**
+}
+
+main "$@"

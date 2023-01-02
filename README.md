@@ -25,7 +25,7 @@ The _minimum_ recommended requirements are:
 
 ## 📦 Installation
 
-* Run `./install`
+* Run `./scripts/install`
 * Start Neovim (`nvim`) and run `:PackerInstall` - ignore any error message about missing plugins, `:PackerInstall` will fix that shortly
 * Restart Neovim
 
@@ -51,4 +51,4 @@ You can find my extra configuration file [here](./src/after/plugin/custom.lua) a
 
 ## ⚠️ Disclamer
 
-This repo is primarily for personal use. The `after/plugin` directory contains personal configs that fit my workflow. You can also install them by running `./install all`.
+This repo is primarily for personal use. The `after/plugin` directory contains personal configs that fit my workflow. You can also install them by running `./scripts/install all`.

@@ -3,21 +3,37 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs }: {
-    defaultPackage.aarch64-darwin =
-      with import nixpkgs { system = "aarch64-darwin"; };
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let pkgs = nixpkgs.legacyPackages.${system}; in
+        {
 
-      pkgs.stdenv.mkDerivation {
-        name = "nvim-config";
+          devShell = pkgs.mkShell {
+            buildInputs = [
+              pkgs.neovim
+              pkgs.shellcheck
+              pkgs.stylua
+            ];
 
-        src = ./src/.;
+            shellHook =
+              ''
+                echo "Welcome to the Neovim dev-shell!"
+              '';
+          };
 
-        installPhase = ''
-          mkdir -p $out
-          cp -r ./**  $out
-        '';
-      };
-  };
+          packages.${system}.default =
+            pkgs.stdenv.mkDerivation {
+              name = "nvim-config";
+              src = ./src/.;
+              installPhase = ''
+                mkdir -p $out
+                cp -r ./**  $out
+              '';
+            };
+        }
+      );
 }
