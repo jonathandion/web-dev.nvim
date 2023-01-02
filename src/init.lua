@@ -29,7 +29,6 @@ require("packer").startup(function(use)
   -- Text manipulation plugins
   use("tpope/vim-surround") --  Surround text objects
   use("wellle/targets.vim") --  Additional text objects
-  use("mg979/vim-visual-multi") --  Multiple cursors
   use("tpope/vim-commentary") --  Comment out code
   use("tpope/vim-repeat") --  Repeat commands
   use("tpope/vim-sleuth") --  Detect indentation
@@ -363,8 +362,8 @@ keyset("n", "<C-space>", "/")
 keyset("n", "<leader>-", ":Explore<cr>")
 
 -- replace word under cursor
-keyset("n", "<C-r>", ":%s#<c-r><c-w>##g<left><left>")
-keyset("v", "<C-r>", ":s#<c-r><c-w>##g<left><left>")
+keyset("n", "<C-n>", ":%s#<c-r><c-w>##g<left><left>")
+keyset("v", "<C-n>", ":s#<c-r><c-w>##g<left><left>")
 
 -- diagnostic
 keyset("n", "<leader>d", vim.diagnostic.open_float)
