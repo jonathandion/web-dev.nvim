@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
@@ -25,7 +24,7 @@
               '';
           };
 
-          packages.${system}.default =
+          defaultPackage =
             pkgs.stdenv.mkDerivation {
               name = "nvim-config";
               src = ./src/.;
