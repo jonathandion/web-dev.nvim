@@ -392,6 +392,9 @@ keyset("n", "<leader>pc", ":PackerClean<cr>")
 -- fugitive
 keyset("n", "<leader>gd", ":Gdiff<cr>")
 
+-- copilot
+keyset("n", "<leader>c", ":Copilot<cr>")
+
 -- easymotion
 keyset("n", ";", "<Plug>(easymotion-overwin-f)")
 
