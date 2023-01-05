@@ -119,6 +119,12 @@ require("telescope").setup({
       ".git",
     },
   },
+  pickers = {
+    find_files = {
+      follow = true;
+      hidden = true;
+    }
+  },
   extensions = {
     file_browser = {
       theme = "ivy",
