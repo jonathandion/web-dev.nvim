@@ -11,5 +11,5 @@ user_cmd("Ranger", "FloatermNew ranger", { bang = true })
 
 -- @keymaps
 local keyset = vim.keymap.set
-keyset("n", "-", ":Ranger<cr>")
+keyset("n", "<C-e>", ":Ranger<cr>")
 keyset("n", "<leader>n", ":Note<cr>")
