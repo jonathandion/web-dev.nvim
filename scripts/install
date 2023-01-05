@@ -19,6 +19,9 @@ main() {
     backup "$HOME/.config/nvim"
   fi
 
+  rm -rf "$HOME/.config/nvim"
+  mkdir "$HOME/.config/nvim"
+
   echo "Installing..."
   if [ "$install_all" == "all" ]; then
     for file in "$src_dir"/*; do
