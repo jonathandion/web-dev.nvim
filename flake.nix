@@ -1,5 +1,5 @@
 {
-  description = "My Neovim Config";
+  description = "web-dev.nvim config";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -11,29 +11,8 @@
       (system:
         let pkgs = nixpkgs.legacyPackages.${system}; in
         {
-
-          devShell = pkgs.mkShell {
-            buildInputs = [
-              pkgs.neovim
-              pkgs.shellcheck
-              pkgs.stylua
-            ];
-
-            shellHook =
-              ''
-                echo "Welcome to the Neovim dev-shell!"
-              '';
-          };
-
-          defaultPackage =
-            pkgs.stdenv.mkDerivation {
-              name = "nvim-config";
-              src = ./src/.;
-              installPhase = ''
-                mkdir -p $out
-                cp -r ./**  $out
-              '';
-            };
+          devShell = import ./shell.nix { inherit pkgs; };
+          defaultPackage = import ./default.nix { inherit pkgs; };
         }
       );
 }
