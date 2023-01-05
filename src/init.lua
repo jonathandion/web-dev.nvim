@@ -21,8 +21,6 @@ require("packer").startup(function(use)
 
   -- Utility plugins
   use("jremmen/vim-ripgrep") --  Grep on steroids
-  use("ThePrimeagen/harpoon") --  Bookmark management
-  use("junegunn/vim-peekaboo") --  Preview registers
   use("machakann/vim-highlightedyank") --  Highlight yanked text
   use("easymotion/vim-easymotion") --  Move fast
 
@@ -407,6 +405,8 @@ keyset("n", "<leader>ff", telescope.git_status, { desc = "[F]ind [F]iles Git Sta
 keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
 keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
 keyset("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind [W]ord" })
+keyset("n", "<leader>fr", telescope.registers, { desc = "[Find] [R]egisters" })
+keyset("n", "<leader>fk", telescope.keymaps, { desc = "[Find] [K]eymaps" })
 
 -- harpoon
 keyset("n", "<leader>m", require("harpoon.mark").add_file)
