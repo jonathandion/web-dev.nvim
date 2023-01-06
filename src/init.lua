@@ -137,10 +137,6 @@ require("telescope").setup({
 })
 local telescope = require("telescope.builtin")
 
--- Harpoon (bookmarks manager)
-require("harpoon").setup()
-require("telescope").load_extension("harpoon")
-
 -- Treesitter (syntax highlight)
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
@@ -413,10 +409,6 @@ keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
 keyset("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind [W]ord" })
 keyset("n", "<leader>fr", telescope.registers, { desc = "[Find] [R]egisters" })
 keyset("n", "<leader>fk", telescope.keymaps, { desc = "[Find] [K]eymaps" })
-
--- harpoon
-keyset("n", "<leader>m", require("harpoon.mark").add_file)
-keyset("n", "<leader>fm", ":Telescope harpoon marks<cr>")
 
 -- lsp - set lsp mappings in callback
 function SetCustomLspMappings(bufnr)
