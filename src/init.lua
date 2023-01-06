@@ -20,7 +20,6 @@ require("packer").startup(function(use)
   use("junegunn/gv.vim") --  Git commit browser
 
   -- Utility plugins
-  use("jremmen/vim-ripgrep") --  Grep on steroids
   use("machakann/vim-highlightedyank") --  Highlight yanked text
   use("easymotion/vim-easymotion") --  Move fast
 
@@ -369,9 +368,6 @@ keyset("v", "<C-n>", ":s#<c-r><c-w>##g<left><left>")
 keyset("n", "<leader>d", vim.diagnostic.open_float)
 keyset("n", "[d", vim.diagnostic.goto_prev)
 keyset("n", "]d", vim.diagnostic.goto_next)
-
--- ripgrep
-keyset("n", "<leader>rg", ":Rg<space>")
 
 -- commentary
 keyset("n", "<C-/>", ":Commentary<cr>")
