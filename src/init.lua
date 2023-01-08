@@ -120,9 +120,9 @@ require("telescope").setup({
   },
   pickers = {
     find_files = {
-      follow = true;
-      hidden = true;
-    }
+      follow = true,
+      hidden = true,
+    },
   },
   extensions = {
     file_browser = {

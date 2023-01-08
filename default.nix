@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{pkgs ? import <nixpkgs> {}}:
 pkgs.stdenv.mkDerivation {
   name = "nvim-config";
   src = ./src/.;

@@ -4,8 +4,12 @@
 
 main() {
   echo "Linting..."
+
   stylua ./src --config-path ./.stylua.toml
+
   shellcheck ./scripts/**
+
+  alejandra .
 }
 
 main "$@"
