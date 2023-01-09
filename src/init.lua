@@ -35,7 +35,6 @@ require("packer").startup(function(use)
 
   -- UI plugins
   use("ellisonleao/gruvbox.nvim") --  Color scheme
-  use("mhinz/vim-startify") --  Custom start screen
   use("nvim-lualine/lualine.nvim") --  Fancy statusline
   use("lewis6991/gitsigns.nvim") --  Git signs
 
@@ -101,12 +100,6 @@ vim.g.netrw_banner = 1
 vim.g.netrw_liststyle = 4
 vim.g.netrw_localrmdir = "rm -r"
 vim.g.netrw_hide = 0
-
--- Startify config (start screen)
-vim.g.startify_change_to_dir = 0
-vim.g.startify_lists = {
-  { header = { ("   Recent Files in: " .. vim.fn.getcwd()) }, type = "dir" },
-}
 
 -- Glance
 require("glance").setup()
