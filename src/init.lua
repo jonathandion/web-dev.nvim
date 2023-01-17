@@ -39,8 +39,8 @@ require("packer").startup(function(use)
   use("lewis6991/gitsigns.nvim") --  Git signs
 
   -- File explorer plugins
-  use("tpope/vim-vinegar")
-  use("unblevable/quick-scope") --  Netrw extension
+  use("tpope/vim-vinegar") -- Netrw with a twist
+  use("unblevable/quick-scope") -- Lightning fast left-right movement
   use("voldikss/vim-floaterm") --  Floating terminal
   use({
     "nvim-telescope/telescope.nvim",
@@ -331,6 +331,9 @@ user_cmd("OldFiles", telescope.oldfiles, {})
 -- @keymaps
 local keyset = vim.keymap.set
 
+-- black hole
+keyset("n", "<leader>dd", '"_dd')
+
 -- remove highlight
 keyset("n", "<Esc><Esc>", ":noh<cr>")
 
@@ -340,6 +343,9 @@ keyset("n", "<up>", "{")
 
 -- quit
 keyset("n", "<leader>q", ":bd<cr>")
+
+-- reload current file
+keyset("n", "<leader>r", ":e %<cr>")
 
 -- save
 keyset("n", "<leader>w", ":w<cr>")
@@ -388,16 +394,17 @@ keyset("n", "<leader>c", ":Copilot<cr>")
 keyset("n", ";", "<Plug>(easymotion-overwin-f)")
 
 -- telescope
-keyset("n", "<C-f>", telescope.find_files, { desc = "[F]ind [F]iles" })
-keyset("n", "<C-p>", telescope.commands, { desc = "[F]ind [C]ommands" })
+keyset("n", "<C-f>", telescope.find_files, { desc = "Find files" })
+keyset("n", "<C-p>", telescope.commands, { desc = "Commands" })
+keyset("n", "<C-e>", telescope.grep_string, { desc = "Grep string" })
 keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
 keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 keyset("n", "<leader>ff", telescope.git_status, { desc = "[F]ind [F]iles Git Status" })
-keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
 keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
-keyset("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind [W]ord" })
+keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
 keyset("n", "<leader>fr", telescope.registers, { desc = "[Find] [R]egisters" })
 keyset("n", "<leader>fk", telescope.keymaps, { desc = "[Find] [K]eymaps" })
+keyset("n", "<leader>fm", telescope.marks, { desc = "[Find] [M]arks" })
 
 -- lsp - set lsp mappings in callback
 function SetCustomLspMappings(bufnr)
