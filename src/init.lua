@@ -70,7 +70,7 @@ require("lazy").setup({
     lazy = false,
     config = function()
       vim.cmd([[colorscheme gruvbox]])
-    end
+    end,
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -85,7 +85,7 @@ require("lazy").setup({
           changedelete = { text = "~" },
         },
       })
-    end
+    end,
   },
   -- Text manipulation plugins
   { "tpope/vim-surround", event = "VeryLazy" }, -- Surround text objects
@@ -96,7 +96,7 @@ require("lazy").setup({
     config = function()
       keyset("n", "<C-/>", ":Commentary<cr>")
       keyset("v", "<C-/>", ":Commentary<cr>")
-    end
+    end,
   },
   { "tpope/vim-repeat", event = "VeryLazy" }, -- Repeat commands
   { "tpope/vim-sleuth", event = "VeryLazy" }, -- Detect indentatio on demand
@@ -111,7 +111,7 @@ require("lazy").setup({
     config = function()
       require("hop").setup()
       keyset("n", ";", ":HopChar1<cr>")
-    end
+    end,
   },
   -- Coding plugins
   {
@@ -124,7 +124,7 @@ require("lazy").setup({
       keyset("n", "<leader>ts", ":TestSuite<cr>", { silent = true })
       keyset("n", "<leader>tl", ":TestLast<cr>", { silent = true })
       keyset("n", "<leader>tv", ":TestVisit<cr>", { silent = true })
-    end
+    end,
   },
   -- Git plugins
   {
@@ -132,7 +132,7 @@ require("lazy").setup({
     event = "VeryLazy",
     config = function()
       keyset("n", "<leader>gd", ":Gdiff<cr>")
-    end
+    end,
   },
   { "ruanyl/vim-gh-line", event = "VeryLazy" },
   { "junegunn/gv.vim", event = "VeryLazy" },
@@ -187,14 +187,14 @@ require("lazy").setup({
       user_cmd("Buffers", telescope.buffers, {})
       user_cmd("Diagnostics", telescope.diagnostics, {})
       user_cmd("OldFiles", telescope.oldfiles, {})
-    end
+    end,
   },
   {
     "github/copilot.vim",
     event = "VeryLazy",
     config = function()
       keyset("n", "<leader>c", ":Copilot<cr>")
-    end
+    end,
   },
   {
     "dnlhc/glance.nvim",
@@ -203,7 +203,7 @@ require("lazy").setup({
     keys = {
       { "gd", ":Glance definitions<cr>", mode = "n", desc = "Go to Definition" },
       { "gr", ":Glance references<cr>", mode = "n", desc = "Go to References" },
-    }
+    },
   },
   -- Syntax plugins
   {
@@ -227,7 +227,7 @@ require("lazy").setup({
           additional_vim_regex_highlighting = false,
         },
       })
-    end
+    end,
   },
   -- LSP plugins
   {
@@ -318,8 +318,8 @@ require("lazy").setup({
 
       lsp.nvim_workspace()
       lsp.setup()
-    end
-  }
+    end,
+  },
 })
 
 -- Custom file types
@@ -355,7 +355,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       vim.cmd("EslintFixAll")
       return
     end
-  end
+  end,
 })
 
 -- @commands
