@@ -7,7 +7,6 @@ user_cmd("Pad", "e /tmp/scratchpad", {})
 user_cmd("Wiki", "e ~/code/wiki", {})
 user_cmd("Gists", "e ~/code/gists", {})
 user_cmd("PrettyJson", ":%!jq '.'", {})
-user_cmd("Ranger", "FloatermNew ranger", { bang = true })
 
 -- @keymaps
 local keyset = vim.keymap.set

@@ -1,13 +1,13 @@
 ```
-             __          __                    _     
- _    _____ / /  _______/ /__ _  __  ___ _  __(_)_ _ 
-| |/|/ / -_) _ \/___/ _  / -_) |/ / / _ \ |/ / /  ' \
-|__,__/\__/_.__/    \_,_/\__/|___(_)_//_/___/_/_/_/_/
-                                                                                                               
+                                                       __          __                    _     
+                                           _    _____ / /  _______/ /__ _  __  ___ _  __(_)_ _ 
+                                          | |/|/ / -_) _ \/___/ _  / -_) |/ / / _ \ |/ / /  ' \
+                                          |__,__/\__/_.__/    \_,_/\__/|___(_)_//_/___/_/_/_/_/
 ```        
 
-* Small: ~300 lines of code.
-* Fast: ~110ms startup time.
+* Small: ~400 lines of code.
+* Fast: ~20ms startup time.
+* Lazy: lazy loads plugins.
 * Simple: one single file, easy to read and understand.
 * Flexible: customize it to your specific needs and preferences.
 
