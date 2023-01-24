@@ -235,20 +235,20 @@ require("lazy").setup({
     event = "VeryLazy",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" },
+      { "neovim/nvim-lspconfig", event = "VeryLazy" },
       -- LSP servers manager
       { "williamboman/mason.nvim", config = true, event = "VeryLazy" },
-      { "williamboman/mason-lspconfig.nvim" },
+      { "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/nvim-cmp", event = "VeryLazy" },
+      { "hrsh7th/cmp-buffer", event = "VeryLazy" },
+      { "hrsh7th/cmp-path", event = "VeryLazy" },
+      { "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
+      { "hrsh7th/cmp-nvim-lua", event = "VeryLazy" },
       -- Snippets
-      { "rafamadriz/friendly-snippets" },
+      { "rafamadriz/friendly-snippets", event = "VeryLazy" },
       -- UI
-      { "j-hui/fidget.nvim", config = true },
+      { "j-hui/fidget.nvim", config = true, event = "VeryLazy" },
     },
     config = function()
       -- Lsp
