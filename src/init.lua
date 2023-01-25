@@ -3,51 +3,9 @@ local user_cmd = vim.api.nvim_create_user_command
 local keyset = vim.keymap.set
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
--- @globals
 -- space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
--- Netrw config (file explorer)
-vim.g.netrw_banner = 1
-vim.g.netrw_liststyle = 4
-vim.g.netrw_localrmdir = "rm -r"
-vim.g.netrw_hide = 0
-
--- @options
-vim.wo.number = true
-vim.o.path = table.concat({ "**" })
-vim.o.background = "dark"
-vim.o.backup = false
-vim.o.breakindent = true
-vim.o.clipboard = "unnamedplus"
-vim.o.cursorline = true
-vim.o.expandtab = true
-vim.o.guicursor = "" -- fat cursor
-vim.o.history = 500
-vim.o.hlsearch = true
-vim.o.ignorecase = true
-vim.o.incsearch = true
-vim.o.laststatus = 2
-vim.o.magic = true
-vim.o.shiftwidth = 2
-vim.o.showmatch = true
-vim.o.signcolumn = "yes"
-vim.o.smartcase = true
-vim.o.smarttab = true
-vim.o.so = 7
-vim.o.softtabstop = 0
-vim.o.tabstop = 2
-vim.o.timeoutlen = 500
-vim.o.title = true
-vim.o.ttimeout = true
-vim.o.ttimeoutlen = 10
-vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.o.undofile = true
-vim.o.updatetime = 250
-vim.o.wildmenu = true
-vim.o.wildmode = "full"
-vim.o.wrap = true
-vim.o.writebackup = false
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -88,61 +46,78 @@ require("lazy").setup({
     end,
   },
   -- Text manipulation plugins
-  { "tpope/vim-surround", event = "VeryLazy" }, -- Surround text objects
-  { "wellle/targets.vim", event = "VeryLazy" }, -- Additional text objects
+  { "tpope/vim-surround", event = "VeryLazy" },
   {
-    "tpope/vim-commentary", -- Comment code
+    "echasnovski/mini.comment",
+    version = '*',
     event = "VeryLazy",
     config = function()
-      keyset("n", "<C-/>", ":Commentary<cr>")
-      keyset("v", "<C-/>", ":Commentary<cr>")
-    end,
+      require('mini.comment').setup()
+    end
   },
-  { "tpope/vim-repeat", event = "VeryLazy" }, -- Repeat commands
-  { "tpope/vim-sleuth", event = "VeryLazy" }, -- Detect indentatio on demand
-  { "tpope/vim-unimpaired", event = "VeryLazy" }, -- Pairs of handy bracket mappings
-  { "andrewradev/splitjoin.vim", event = "VeryLazy" }, -- Split/join lines
-  { "raimondi/delimitmate", event = "VeryLazy" }, -- Auto closing quotes, brackets, etc
+  {
+    "echasnovski/mini.pairs",
+    version = '*',
+    event = "VeryLazy",
+    config = function()
+      require('mini.pairs').setup()
+    end
+  },
+  {
+    "echasnovski/mini.ai",
+    version = '*',
+    event = "VeryLazy",
+    config = function()
+      require('mini.ai').setup()
+    end
+  },
   -- Utility plugins
-  { "machakann/vim-highlightedyank", event = "VeryLazy" },
   {
     "phaazon/hop.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("hop").setup()
-      keyset("n", ";", ":HopChar1<cr>")
-    end,
+    config = true,
+    keys = {
+      { ";", ":HopChar1<cr>" },
+    },
   },
   -- Coding plugins
   {
     "janko-m/vim-test",
+    keys = {
+      { "<leader>tn", ":TestNearest<cr>" },
+      { "<leader>tf", ":TestFile<cr>" },
+    },
+  },
+  {
+    "github/copilot.vim",
     event = "VeryLazy",
-    ft = { "javascript", "typescript" },
-    config = function()
-      keyset("n", "<leader>tn", ":TestNearest<cr>", { silent = true })
-      keyset("n", "<leader>tf", ":TestFile<cr>", { silent = true })
-      keyset("n", "<leader>ts", ":TestSuite<cr>", { silent = true })
-      keyset("n", "<leader>tl", ":TestLast<cr>", { silent = true })
-      keyset("n", "<leader>tv", ":TestVisit<cr>", { silent = true })
-    end,
   },
   -- Git plugins
   {
     "tpope/vim-fugitive",
-    event = "VeryLazy",
-    config = function()
-      keyset("n", "<leader>gd", ":Gdiff<cr>")
-    end,
+    keys = {
+      { "<leader>gs", ":Git<cr>" },
+      { "<leader>gd", ":Gdiff<cr>" }
+    }
   },
   { "ruanyl/vim-gh-line", event = "VeryLazy" },
   { "junegunn/gv.vim", event = "VeryLazy" },
   -- File explorer plugins
   { "tpope/vim-vinegar", event = "VeryLazy" },
-  { "unblevable/quick-scope", event = "VeryLazy" },
-  -- Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
-    event = "VeryLazy",
+    keys = {
+      { "<C-f>", ":Telescope find_files<cr>", desc = "Find files"  },
+      { "<C-p>", ":Telescope commands<cr>", desc = "Commands" },
+      { "<C-e>", ":Telescope grep_string<cr>", desc = "Grep String" },
+      { "<leader>fb", ":Telescope buffers<cr>", desc = "[F]ind [B]uffers" },
+      { "<leader>fd", ":Telescope diagnostics<cr>",  desc = "[F]ind [D]iagnostics" },
+      { "<leader>ff", ":Telescope git_status<cr>",  desc = "[F]ind [F]iles Git Status" },
+      { "<leader>fh", ":Telescope oldfiles<cr>",  desc = "[F]ind [H]istory" },
+      { "<leader>fg", ":Telescope live_grep<cr>",  desc = "[F]ind [G]rep" },
+      { "<leader>fr", ":Telescope registers<cr>", desc = "[Find] [R]egisters" },
+      { "<leader>fk", ":Telescope keymaps<cr>", desc = "[Find] [K]eymaps" },
+      { "<leader>fm", ":Telescope marks<cr>",  desc = "[Find] [M]arks" },
+    },
     dependencies = { { "nvim-lua/plenary.nvim" } },
     config = function()
       require("telescope").setup({
@@ -167,42 +142,14 @@ require("lazy").setup({
           },
         },
       })
-
-      local telescope = require("telescope.builtin")
-      keyset("n", "<C-f>", telescope.find_files, { desc = "Find Files" })
-      keyset("n", "<C-p>", telescope.commands, { desc = "Commands" })
-      keyset("n", "<C-e>", telescope.grep_string, { desc = "Grep String" })
-      keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
-      keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
-      keyset("n", "<leader>ff", telescope.git_status, { desc = "[F]ind [F]iles Git Status" })
-      keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
-      keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
-      keyset("n", "<leader>fr", telescope.registers, { desc = "[Find] [R]egisters" })
-      keyset("n", "<leader>fk", telescope.keymaps, { desc = "[Find] [K]eymaps" })
-      keyset("n", "<leader>fm", telescope.marks, { desc = "[Find] [M]arks" })
-
-      user_cmd("Files", telescope.find_files, {})
-      user_cmd("Commands", telescope.commands, {})
-      user_cmd("GitStatusFiles", telescope.git_status, {})
-      user_cmd("Buffers", telescope.buffers, {})
-      user_cmd("Diagnostics", telescope.diagnostics, {})
-      user_cmd("OldFiles", telescope.oldfiles, {})
-    end,
-  },
-  {
-    "github/copilot.vim",
-    event = "VeryLazy",
-    config = function()
-      keyset("n", "<leader>c", ":Copilot<cr>")
     end,
   },
   {
     "dnlhc/glance.nvim",
-    event = "VeryLazy",
     config = true,
     keys = {
-      { "gd", ":Glance definitions<cr>", mode = "n", desc = "Go to Definition" },
-      { "gr", ":Glance references<cr>", mode = "n", desc = "Go to References" },
+      { "gd", ":Glance definitions<cr>", desc = "Go to Definition" },
+      { "gr", ":Glance references<cr>", desc = "Go to References" },
     },
   },
   -- Syntax plugins
@@ -321,6 +268,48 @@ require("lazy").setup({
     end,
   },
 })
+
+-- @options
+vim.wo.number = true
+vim.o.path = table.concat({ "**" })
+vim.o.background = "dark"
+vim.o.backup = false
+vim.o.breakindent = true
+vim.o.clipboard = "unnamedplus"
+vim.o.cursorline = true
+vim.o.expandtab = true
+vim.o.guicursor = "" -- fat cursor
+vim.o.history = 500
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.incsearch = true
+vim.o.laststatus = 2
+vim.o.magic = true
+vim.o.shiftwidth = 2
+vim.o.showmatch = true
+vim.o.signcolumn = "yes"
+vim.o.smartcase = true
+vim.o.smarttab = true
+vim.o.so = 7
+vim.o.softtabstop = 0
+vim.o.tabstop = 2
+vim.o.timeoutlen = 500
+vim.o.title = true
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 10
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undofile = true
+vim.o.updatetime = 250
+vim.o.wildmenu = true
+vim.o.wildmode = "full"
+vim.o.wrap = true
+vim.o.writebackup = false
+
+-- Netrw config (file explorer)
+vim.g.netrw_banner = 1
+vim.g.netrw_liststyle = 4
+vim.g.netrw_localrmdir = "rm -r"
+vim.g.netrw_hide = 0
 
 -- Custom file types
 vim.filetype.add({
