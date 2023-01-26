@@ -6,7 +6,7 @@
 ```        
 * Small: ~400 lines of code.
 * Fast: ~20ms startup time.
-* Lazy: lazy loads plugins.
+* Lazy: loads plugins on demand.
 * Simple: one single file, easy to read and understand.
 * Flexible: customize it to your specific needs and preferences.
 
