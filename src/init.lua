@@ -101,7 +101,13 @@ require("lazy").setup({
     }
   },
   { "ruanyl/vim-gh-line", event = "VeryLazy" },
-  { "junegunn/gv.vim", event = "VeryLazy" },
+  {
+    "bjunegunn/gv.vim",
+    event = "VeryLazy",
+    dependencies = {
+      { "tpope/vim-fugitive", lazy = true }
+    }
+  },
   -- File explorer plugins
   { "tpope/vim-vinegar", event = "VeryLazy" },
   {
@@ -214,6 +220,7 @@ require("lazy").setup({
         "html",
         "tsserver",
         "cssls",
+        "tailwindcss",
         "stylelint_lsp",
         "eslint",
         "marksman",
@@ -285,7 +292,7 @@ opt.history = 500 -- History size
 opt.hlsearch = true -- Highlight search
 opt.ignorecase = true -- Ignore case
 opt.incsearch = true -- Show search matches
-opt.laststatus = 0 -- No status line
+opt.laststatus = 2 -- Always display the status line
 opt.magic = true -- Regular expressions
 opt.shiftwidth = 2 -- Size of an indent
 opt.showmatch = true -- Show matching brackets
