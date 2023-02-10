@@ -124,6 +124,8 @@ require("lazy").setup({
       { "<leader>fr", ":Telescope registers<cr>", desc = "[Find] [R]egisters" },
       { "<leader>fk", ":Telescope keymaps<cr>", desc = "[Find] [K]eymaps" },
       { "<leader>fm", ":Telescope marks<cr>", desc = "[Find] [M]arks" },
+      { "gd", ":Telescope lsp_definitions<cr>", desc = "Go to Definition" },
+      { "gr", ":Telescope lsp_references<cr>", desc = "Go to References" },
     },
     dependencies = { { "nvim-lua/plenary.nvim", lazy = true } },
     config = function()
@@ -150,14 +152,6 @@ require("lazy").setup({
         },
       })
     end,
-  },
-  {
-    "dnlhc/glance.nvim",
-    config = true,
-    keys = {
-      { "gd", ":Glance definitions<cr>", desc = "Go to Definition" },
-      { "gr", ":Glance references<cr>", desc = "Go to References" },
-    },
   },
   -- Syntax plugins
   {
@@ -380,6 +374,7 @@ end
 
 cmd_alias("node", "! node %")
 cmd_alias("tsnode", "! ts-node %")
+user_cmd("Styling", "! npx stylelint --fix %", {})
 
 -- @keymaps
 -- black hole
