@@ -102,7 +102,7 @@ require("lazy").setup({
   },
   { "ruanyl/vim-gh-line", event = "VeryLazy" },
   {
-    "bjunegunn/gv.vim",
+    "junegunn/gv.vim",
     event = "VeryLazy",
     dependencies = {
       { "tpope/vim-fugitive", lazy = true }
