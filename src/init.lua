@@ -246,11 +246,14 @@ require("lazy").setup({
         mapping = cmp_mappings,
       })
 
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      -- https://github.com/neovim/nvim-lspconfig
       lsp.on_attach(function(_, bufnr)
         map("n", "gI", vim.lsp.buf.implementation, { desc = "[G]oto [I]mplementation" })
         map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
         map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
         map("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" })
+        map("n", "<leader>h", vim.lsp.buf.hover, { desc = "[H]over" })
 
         local telescope = require("telescope.builtin")
         map("n", "<leader>ds", telescope.lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
@@ -371,10 +374,6 @@ function _G.cmd_alias(alias, cmd)
     "cabbrev <expr> " .. alias .. " " .. "v:lua.abbreviate_or_noop('" .. alias .. "', '" .. cmd .. "')"
   )
 end
-
-cmd_alias("node", "! node %")
-cmd_alias("tsnode", "! ts-node %")
-user_cmd("Styling", "! npx stylelint --fix %", {})
 
 -- @keymaps
 -- black hole
