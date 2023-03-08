@@ -7,6 +7,9 @@ user_cmd("Pad", "e /tmp/scratchpad", {})
 user_cmd("Wiki", "e ~/code/wiki", {})
 user_cmd("Gists", "e ~/code/gists", {})
 user_cmd("PrettyJson", ":%!jq '.'", {})
+user_cmd("Node", "! npx node %", {})
+user_cmd("Ts", "! npx ts-node %", {})
+user_cmd("Styling", "! npx stylelint --fix %", {})
 
 -- @keymaps
 local keyset = vim.keymap.set
