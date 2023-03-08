@@ -50,27 +50,27 @@ require("lazy").setup({
   { "tpope/vim-repeat", event = "VeryLazy" },
   {
     "echasnovski/mini.comment",
-    version = '*',
+    version = "*",
     event = "VeryLazy",
     config = function()
-      require('mini.comment').setup()
-    end
+      require("mini.comment").setup()
+    end,
   },
   {
     "echasnovski/mini.pairs",
-    version = '*',
+    version = "*",
     event = "VeryLazy",
     config = function()
-      require('mini.pairs').setup()
-    end
+      require("mini.pairs").setup()
+    end,
   },
   {
     "echasnovski/mini.ai",
-    version = '*',
+    version = "*",
     event = "VeryLazy",
     config = function()
-      require('mini.ai').setup()
-    end
+      require("mini.ai").setup()
+    end,
   },
   -- Utility plugins
   {
@@ -97,16 +97,16 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     keys = {
       { "<leader>gs", ":Git<cr>" },
-      { "<leader>gd", ":Gdiff<cr>" }
-    }
+      { "<leader>gd", ":Gdiff<cr>" },
+    },
   },
   { "ruanyl/vim-gh-line", event = "VeryLazy" },
   {
     "junegunn/gv.vim",
     event = "VeryLazy",
     dependencies = {
-      { "tpope/vim-fugitive", lazy = true }
-    }
+      { "tpope/vim-fugitive", lazy = true },
+    },
   },
   -- File explorer plugins
   { "tpope/vim-vinegar", event = "VeryLazy" },
