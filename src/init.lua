@@ -165,6 +165,7 @@ require("lazy").setup({
           "javascript",
           "typescript",
           "json",
+          "vim",
           "lua",
           "bash",
           "markdown",
